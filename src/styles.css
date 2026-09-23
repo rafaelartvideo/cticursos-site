@@ -1122,3 +1122,317 @@ body {
     object-position: 54% 50%;
   }
 }
+
+
+/* Curso e rodapé — refinamento 2026-09-23 */
+
+/* Header sem linha azul inferior */
+.header {
+  border-bottom: 0;
+}
+.header::after {
+  display: none;
+}
+
+/* Informações do hero do curso */
+.course-hero-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 26px;
+  margin-top: 25px;
+}
+.course-hero-facts > div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 118px;
+}
+.course-hero-facts span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #9fb5d3;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.course-hero-facts span svg {
+  color: var(--yellow);
+}
+.course-hero-facts strong {
+  color: #fff;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+/* Dados dos cards dos cursos, logo abaixo da imagem */
+.catalog-facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-bottom: 1px solid #e6edf7;
+  background: #f8fbff;
+}
+.catalog-facts > div {
+  min-width: 0;
+  padding: 14px 13px;
+  position: relative;
+}
+.catalog-facts > div:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 24%;
+  right: 0;
+  width: 1px;
+  height: 52%;
+  background: #dbe5f1;
+}
+.catalog-facts span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #7a8aa1;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .055em;
+  text-transform: uppercase;
+}
+.catalog-facts span svg {
+  color: var(--blue);
+}
+.catalog-facts strong {
+  display: block;
+  margin-top: 5px;
+  color: var(--navy);
+  font-size: 12px;
+  line-height: 1.25;
+  font-weight: 800;
+}
+.catalog-content {
+  padding-top: 21px;
+}
+.catalog-meta {
+  display: none;
+}
+
+/* Faixa abaixo do nome do curso: sem cards, só divisórias */
+.course-summary {
+  padding: 0;
+  background: #fff;
+  border-bottom: 1px solid #e8eef6;
+}
+.course-summary .benefit-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+}
+.course-summary .benefit-item {
+  position: relative;
+  min-height: 102px;
+  padding: 23px 24px;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+.course-summary .benefit-item:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 25%;
+  right: 0;
+  width: 1px;
+  height: 50%;
+  background: #dce6f2;
+}
+.course-summary .benefit-item > svg {
+  flex: 0 0 auto;
+  color: var(--blue);
+}
+.course-summary .benefit-item div {
+  min-width: 0;
+}
+.course-summary .benefit-item span {
+  display: block;
+  margin-bottom: 4px;
+  color: #8391a5;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.course-summary .benefit-item strong {
+  display: block;
+  color: var(--navy);
+  font-size: 15px;
+  line-height: 1.25;
+  font-weight: 800;
+}
+
+/* Sobre o curso sem título curto redundante */
+#curso .section-copy > .section-label + p {
+  margin-top: 16px;
+}
+
+/* FAQ com hierarquia mais clara */
+.faq-list {
+  gap: 10px;
+}
+.faq-item {
+  border-radius: 14px;
+  box-shadow: none;
+}
+.faq-item button {
+  padding: 21px 22px;
+  font-size: 14px;
+  font-weight: 800;
+}
+.faq-item.open {
+  border-color: #bfd5f2;
+  box-shadow: 0 12px 28px rgba(3,27,66,.055);
+}
+.faq-item.open button {
+  color: #0759d8;
+}
+.faq-item p {
+  margin: -2px 22px 22px;
+  max-width: 780px;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* Rodapé completo */
+.footer {
+  padding: 48px 0 18px;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr .7fr 1fr 1.15fr;
+  align-items: start;
+  gap: 44px;
+}
+.footer-brand {
+  display: block;
+}
+.footer-brand-logo {
+  display: block;
+  width: min(235px, 100%);
+  max-height: 72px;
+  object-fit: contain;
+  object-position: left center;
+}
+.footer-brand p {
+  max-width: 300px;
+  margin: 14px 0 0;
+  color: #97aac5;
+  font-size: 12px;
+  line-height: 1.6;
+}
+.footer-column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 11px;
+  color: #bdcbe0;
+  font-size: 12px;
+}
+.footer-column > strong {
+  margin-bottom: 3px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.footer-column a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #bdcbe0;
+  transition: color .18s ease, transform .18s ease;
+}
+.footer-column a:hover {
+  color: #fff;
+  transform: translateX(2px);
+}
+.footer-column a svg {
+  color: var(--yellow);
+}
+.footer-location span {
+  color: #9eb0c9;
+  line-height: 1.55;
+}
+
+@media (max-width: 980px) {
+  .course-hero-facts {
+    justify-content: center;
+  }
+
+  .footer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 34px;
+  }
+}
+
+@media (max-width: 640px) {
+  .course-hero-facts {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    width: 100%;
+    text-align: left;
+  }
+  .course-hero-facts > div {
+    min-width: 0;
+    padding: 0 10px;
+    position: relative;
+  }
+  .course-hero-facts > div:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 15%;
+    right: 0;
+    width: 1px;
+    height: 70%;
+    background: rgba(255,255,255,.13);
+  }
+  .course-hero-facts span {
+    font-size: 8px;
+  }
+  .course-hero-facts strong {
+    font-size: 12px;
+  }
+
+  .catalog-facts > div {
+    padding: 12px 9px;
+  }
+  .catalog-facts span {
+    font-size: 8px;
+  }
+  .catalog-facts strong {
+    font-size: 10.5px;
+  }
+
+  .course-summary .benefit-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .course-summary .benefit-item {
+    min-height: 92px;
+    padding: 18px 14px;
+  }
+  .course-summary .benefit-item:nth-child(2n)::after {
+    display: none;
+  }
+  .course-summary .benefit-item span {
+    font-size: 9px;
+  }
+  .course-summary .benefit-item strong {
+    font-size: 13px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .footer-brand-logo {
+    width: 210px;
+  }
+}
