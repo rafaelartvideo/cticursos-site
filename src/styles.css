@@ -938,3 +938,187 @@ body {
     object-position: 54% 50%;
   }
 }
+
+
+/* Ajuste final dos diferenciais + imagem real do curso de celulares */
+.home-trust {
+  padding: 0;
+  background: #fff;
+  border-bottom: 1px solid #e6edf7;
+}
+
+.home-trust .trust-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+}
+
+.home-trust .trust-item {
+  position: relative;
+  min-height: 138px;
+  padding: 24px 28px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: transparent;
+  border: 0 !important;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.home-trust .trust-item::after {
+  content: "";
+  position: absolute;
+  top: 25%;
+  right: 0;
+  width: 1px;
+  height: 50%;
+  background: #dbe5f1;
+}
+
+.home-trust .trust-item:last-child::after {
+  display: none;
+}
+
+.home-trust .trust-item:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.home-trust .trust-icon {
+  width: 46px;
+  height: 46px;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  color: #0b63f4;
+  background: #eef5ff;
+  border: 1px solid #dbe9fb;
+}
+
+.home-trust .trust-item h3 {
+  margin: 0 0 6px;
+  color: var(--navy);
+  font-size: 15px;
+  line-height: 1.25;
+  font-weight: 800;
+  letter-spacing: -.02em;
+}
+
+.home-trust .trust-item p {
+  margin: 0;
+  color: #66758c;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+/* Foto do curso no card da home */
+.catalog-art-photo {
+  min-height: 180px;
+  display: block;
+  background: #071a37;
+}
+
+.catalog-art-photo::before,
+.catalog-art-photo::after {
+  display: none;
+}
+
+.catalog-art-photo > img {
+  width: 100%;
+  height: 180px;
+  display: block;
+  object-fit: cover;
+  object-position: 50% 54%;
+}
+
+/* Foto do curso na página de Manutenção de Celulares */
+.course-photo-card {
+  position: relative;
+  padding: 0;
+  min-height: 470px;
+  overflow: hidden;
+  isolation: isolate;
+  background: #071a37;
+}
+
+.course-photo-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(180deg, rgba(3,20,47,.08) 0%, rgba(3,20,47,.02) 45%, rgba(3,20,47,.88) 100%),
+    linear-gradient(90deg, rgba(2,18,43,.12), transparent 44%);
+  pointer-events: none;
+}
+
+.course-photo-card .course-photo {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: 50% 53%;
+}
+
+.course-photo-card .hero-badge {
+  position: absolute;
+  z-index: 2;
+  top: 24px;
+  left: 24px;
+}
+
+.course-photo-card .course-photo-caption {
+  position: absolute;
+  z-index: 2;
+  left: 26px;
+  right: 26px;
+  bottom: 24px;
+}
+
+@media (max-width: 980px) {
+  .home-trust .trust-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .home-trust .trust-item:nth-child(2n)::after {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .home-trust .trust-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-trust .trust-item {
+    min-height: 0;
+    padding: 18px 4px;
+  }
+
+  .home-trust .trust-item::after {
+    display: none;
+  }
+
+  .catalog-art-photo,
+  .catalog-art-photo > img {
+    min-height: 150px;
+    height: 150px;
+  }
+
+  .catalog-art-photo > img {
+    object-position: 52% 52%;
+  }
+
+  .course-photo-card {
+    min-height: 390px;
+  }
+
+  .course-photo-card .course-photo {
+    object-position: 54% 50%;
+  }
+}
