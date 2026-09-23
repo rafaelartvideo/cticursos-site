@@ -231,7 +231,52 @@ function App() {
   const course = courseSlug ? getCourseBySlug(courseSlug) : undefined
 
   useEffect(() => {
-    document.title = course ? `${course.title} | CTI` : normalized === '/' ? 'CTI | Centro Técnico Integrado' : 'Página não encontrada | CTI'
+    const baseUrl = 'https://cticentrotecnicointegrado.com.br'
+    const isHome = normalized === '/'
+    const isNotFound = !isHome && !course
+    const title = course
+      ? `${course.title} | CTI`
+      : isHome
+        ? 'CTI | Centro Técnico Integrado'
+        : 'Página não encontrada | CTI'
+    const description = course
+      ? `${course.shortDescription} Curso presencial no CTI — Centro Técnico Integrado.`
+      : 'CTI — Centro Técnico Integrado. Cursos presenciais de eletrônica e manutenção com foco em aprendizado prático.'
+    const canonicalUrl = course
+      ? `${baseUrl}/cursos/${course.slug}`
+      : baseUrl + '/'
+
+    document.title = title
+
+    const upsertMeta = (attribute: 'name' | 'property', key: string, value: string) => {
+      let element = document.head.querySelector<HTMLMetaElement>(`meta[${attribute}="${key}"]`)
+      if (!element) {
+        element = document.createElement('meta')
+        element.setAttribute(attribute, key)
+        document.head.appendChild(element)
+      }
+      element.content = value
+    }
+
+    upsertMeta('name', 'description', description)
+    upsertMeta('name', 'robots', isNotFound ? 'noindex, nofollow' : 'index, follow')
+    upsertMeta('property', 'og:type', 'website')
+    upsertMeta('property', 'og:locale', 'pt_BR')
+    upsertMeta('property', 'og:site_name', 'CTI — Centro Técnico Integrado')
+    upsertMeta('property', 'og:title', title)
+    upsertMeta('property', 'og:description', description)
+    upsertMeta('property', 'og:url', canonicalUrl)
+    upsertMeta('name', 'twitter:card', 'summary')
+    upsertMeta('name', 'twitter:title', title)
+    upsertMeta('name', 'twitter:description', description)
+
+    let canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]')
+    if (!canonical) {
+      canonical = document.createElement('link')
+      canonical.rel = 'canonical'
+      document.head.appendChild(canonical)
+    }
+    canonical.href = canonicalUrl
   }, [normalized, course])
 
   if (normalized === '/') return <HomePage navigate={navigate} />
