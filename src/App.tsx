@@ -278,8 +278,8 @@ function CoursePage({ navigate, course }: { navigate: (href: string) => void; co
       <article className="benefit-item"><Icon name="map" size={22} /><div><span>Modalidade</span><strong>Presencial</strong></div></article>
       <article className="benefit-item"><Icon name="clock" size={22} /><div><span>Duração</span><strong>{course.duration}</strong></div></article>
       <article className="benefit-item"><Icon name="book" size={22} /><div><span>Carga diária</span><strong>{course.dailyHours}</strong></div></article>
-      <article className="benefit-item"><Icon name="support" size={22} /><div><span>Suporte</span><strong>90 dias após o curso</strong></div></article>
       <article className="benefit-item"><Icon name="shield" size={22} /><div><span>Certificação</span><strong>Certificado de conclusão</strong></div></article>
+      <article className="benefit-item support-item"><Icon name="support" size={22} /><div><span>Suporte</span><strong>90 dias após o curso</strong></div></article>
     </div></section>
 
     <section className="section light" id="curso"><div className="container two-col"><div className="section-copy"><h2>Sobre o curso</h2><p>{course.description}</p></div><div className="check-panel">{course.highlights.map(text => <div className="check-row" key={text}><span><Icon name="check" size={18} /></span><p>{text}</p></div>)}</div></div></section>

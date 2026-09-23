@@ -1682,3 +1682,44 @@ body {
     display: none !important;
   }
 }
+
+
+/* Mobile — resumo do curso em 2 colunas com suporte destacado */
+@media (max-width: 640px) {
+  .course-summary .benefit-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .course-summary .benefit-item,
+  .course-summary .benefit-item:nth-child(2n) {
+    min-height: 88px;
+    padding: 17px 12px;
+  }
+
+  .course-summary .benefit-item::after {
+    display: block !important;
+    top: 24%;
+    height: 52%;
+  }
+
+  .course-summary .benefit-item:nth-child(2n)::after,
+  .course-summary .support-item::after {
+    display: none !important;
+  }
+
+  .course-summary .benefit-item:nth-child(-n+2) {
+    border-bottom: 1px solid #e7edf5;
+  }
+
+  .course-summary .support-item {
+    grid-column: 1 / -1;
+    min-height: 76px;
+    justify-content: center;
+    border-top: 1px solid #e7edf5;
+    text-align: left;
+  }
+
+  .course-summary .support-item strong {
+    color: var(--navy);
+  }
+}
