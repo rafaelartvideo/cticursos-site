@@ -105,7 +105,7 @@ export const siteConfig = {
     instagram: '@cticursos',
   },
   contact: {
-    whatsappNumber: '5585000000000',
+    whatsappNumber: '557998567020',
     whatsappMessage: 'Olá! Quero saber mais sobre os cursos do CTI.',
     instagramUrl: 'https://instagram.com/cticursos',
     facebookUrl: '#',
