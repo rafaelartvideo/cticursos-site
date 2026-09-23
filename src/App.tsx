@@ -138,8 +138,6 @@ function Header({ navigate, course }: { navigate: (href: string) => void; course
 
 function Footer({ navigate }: { navigate: (href: string) => void }) {
   const whatsapp = makeWhatsapp(siteConfig.contact.whatsappMessage)
-  const hasAddress = Boolean(siteConfig.contact.address)
-
   return <footer className="footer" id="contato">
     <div className="container footer-grid">
       <div className="footer-brand">
@@ -167,7 +165,7 @@ function Footer({ navigate }: { navigate: (href: string) => void }) {
 
       <div className="footer-column footer-location">
         <strong>Endereço</strong>
-        {hasAddress && <span>{siteConfig.contact.address}</span>}
+        <span>{siteConfig.contact.address}</span>
         <a href={siteConfig.contact.mapsUrl} target="_blank" rel="noreferrer"><Icon name="map" size={17} /> Ver localização no Google Maps</a>
       </div>
     </div>
