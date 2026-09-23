@@ -780,3 +780,161 @@ body {
     height: 48px;
   }
 }
+
+
+/* Diferenciais em faixa limpa + foto do curso de celulares */
+.home-trust {
+  padding: 0;
+  background: #ffffff;
+}
+.home-trust .trust-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0;
+}
+.home-trust .trust-item {
+  min-height: 142px;
+  padding: 25px 22px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  position: relative;
+}
+.home-trust .trust-item:not(:last-child) {
+  border-right: 1px solid #dde7f3;
+}
+.home-trust .trust-item:hover {
+  transform: none;
+  box-shadow: none;
+}
+.home-trust .trust-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 13px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  color: #0b63f4;
+  background: #eef5ff;
+  border: 1px solid #dbe9fb;
+}
+.home-trust .trust-item h3 {
+  margin: 1px 0 7px;
+  color: var(--navy);
+  font-size: 14px;
+  line-height: 1.25;
+  font-weight: 800;
+  letter-spacing: -.02em;
+}
+.home-trust .trust-item p {
+  margin: 0;
+  color: #66758c;
+  font-size: 11.5px;
+  line-height: 1.55;
+}
+
+.course-photo-card {
+  padding: 0;
+  min-height: 470px;
+  isolation: isolate;
+  background: #071a37;
+}
+.course-photo-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(180deg, rgba(3,20,47,.12) 0%, rgba(3,20,47,.06) 44%, rgba(3,20,47,.88) 100%),
+    linear-gradient(90deg, rgba(2,18,43,.16), transparent 42%);
+  pointer-events: none;
+}
+.course-photo-card .course-photo {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 53%;
+}
+.course-photo-card .hero-badge {
+  position: absolute;
+  z-index: 2;
+  top: 24px;
+  left: 24px;
+  box-shadow: 0 10px 24px rgba(0,0,0,.18);
+}
+.course-photo-card .course-photo-caption {
+  position: absolute;
+  z-index: 2;
+  left: 26px;
+  right: 26px;
+  bottom: 24px;
+  gap: 6px;
+}
+.course-photo-card .course-photo-caption strong {
+  font-size: 22px;
+  letter-spacing: -.03em;
+}
+.course-photo-card .course-photo-caption span {
+  color: #d7e5f8;
+  font-size: 13px;
+}
+
+@media (max-width: 1100px) {
+  .home-trust .trust-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .home-trust .trust-item {
+    border-right: 1px solid #dde7f3;
+    border-bottom: 1px solid #e8eef6;
+  }
+  .home-trust .trust-item:nth-child(3n) {
+    border-right: 0;
+  }
+  .home-trust .trust-item:nth-last-child(-n+2) {
+    border-bottom: 0;
+  }
+}
+
+@media (max-width: 760px) {
+  .home-trust .trust-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .home-trust .trust-item:nth-child(3n) {
+    border-right: 1px solid #dde7f3;
+  }
+  .home-trust .trust-item:nth-child(2n) {
+    border-right: 0;
+  }
+  .home-trust .trust-item:nth-last-child(-n+2) {
+    border-bottom: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .home-trust .trust-grid {
+    grid-template-columns: 1fr;
+  }
+  .home-trust .trust-item,
+  .home-trust .trust-item:nth-child(2n),
+  .home-trust .trust-item:nth-child(3n) {
+    min-height: 0;
+    padding: 18px 4px;
+    border-right: 0;
+    border-bottom: 1px solid #e5edf7;
+  }
+  .home-trust .trust-item:last-child {
+    border-bottom: 0;
+  }
+  .course-photo-card {
+    min-height: 400px;
+  }
+  .course-photo-card .course-photo {
+    object-position: 54% 50%;
+  }
+}
