@@ -1723,3 +1723,61 @@ body {
     color: var(--navy);
   }
 }
+
+
+/* Topo — unificação visual entre header e hero */
+.header,
+.hero {
+  background:
+    linear-gradient(90deg, #03183a 0%, #05275b 48%, #063675 100%);
+}
+
+/* Mantém o header com profundidade, mas sem destoar da primeira seção */
+.header {
+  box-shadow: 0 10px 28px rgba(1, 17, 44, .22);
+}
+
+/* O hero usa a mesma base do header; os glows fazem o destaque sem trocar a cor principal */
+.hero-glow-one {
+  background: radial-gradient(circle, rgba(38, 139, 255, .27), transparent 67%);
+}
+
+.hero-glow-two {
+  background: radial-gradient(circle, rgba(255, 196, 0, .085), transparent 68%);
+}
+
+/* Breadcrumb dos cursos integrado ao mesmo topo */
+.course-breadcrumb {
+  background:
+    linear-gradient(90deg, #03183a 0%, #05275b 48%, #063675 100%);
+  border-bottom: 1px solid rgba(255,255,255,.07);
+}
+
+.course-breadcrumb .container {
+  color: #91a9c8;
+}
+
+.course-breadcrumb a {
+  color: #d6e6fa;
+}
+
+.course-breadcrumb a:hover {
+  color: var(--yellow-2);
+}
+
+.course-breadcrumb strong {
+  color: #ffffff;
+}
+
+.course-breadcrumb .container > span {
+  color: rgba(255,255,255,.28);
+}
+
+/* Menu mobile segue exatamente a mesma família de azul do topo */
+@media (max-width: 980px) {
+  .mobile-nav {
+    background:
+      linear-gradient(90deg, #03183a 0%, #05275b 48%, #063675 100%);
+    border-bottom-color: rgba(255,255,255,.08);
+  }
+}
