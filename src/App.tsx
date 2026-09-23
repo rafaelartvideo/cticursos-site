@@ -138,7 +138,7 @@ function Header({ navigate, course }: { navigate: (href: string) => void; course
 
 function Footer({ navigate }: { navigate: (href: string) => void }) {
   const whatsapp = makeWhatsapp(siteConfig.contact.whatsappMessage)
-  const hasAddress = siteConfig.contact.address && siteConfig.contact.address !== 'Endereço a definir'
+  const hasAddress = Boolean(siteConfig.contact.address)
 
   return <footer className="footer" id="contato">
     <div className="container footer-grid">
