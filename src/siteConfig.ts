@@ -110,7 +110,7 @@ export const siteConfig = {
     instagramUrl: 'https://instagram.com/cticursos',
     facebookUrl: 'https://www.facebook.com/cursoscti',
     mapsUrl: 'https://maps.app.goo.gl/KowqJfbdpXjTfcfP8?g_st=ac',
-    address: 'Endereço a definir',
+    address: 'Rua Laranjeiras, 1190, Aracaju, Sergipe, 49055-380',
   },
   courses,
 } as const
