@@ -4,9 +4,9 @@ import { courses, getCourseBySlug, siteConfig, type Course, type CourseIcon } fr
 type IconName =
   | 'check' | 'tools' | 'support' | 'arrow' | 'whatsapp' | 'menu' | 'close'
   | 'clock' | 'users' | 'map' | 'book' | 'home' | 'phone' | 'bolt' | 'shield'
-  | 'laptop' | 'desktop' | 'chip' | 'code' | 'money'
+  | 'laptop' | 'desktop' | 'chip' | 'code' | 'money' | 'instagram' | 'facebook'
 
-function Icon({ name, size = 20 }: { name: IconName; size?: number }) {
+function Icon({ name, size = 20, className }: { name: IconName; size?: number; className?: string }) {
   const common = {
     width: size, height: size, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor',
     strokeWidth: 1.9, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const,
@@ -16,7 +16,7 @@ function Icon({ name, size = 20 }: { name: IconName; size?: number }) {
     check: <path d="m5 12 4 4L19 6" />,
     tools: <><path d="M14.7 6.3a4 4 0 0 0-5-5l2.1 2.1-2.4 2.4-2.1-2.1a4 4 0 0 0 5 5l6.8 6.8a2 2 0 0 1-2.8 2.8l-6.8-6.8" /><path d="m5 19 4-4" /></>,
     support: <><path d="M4 12a8 8 0 0 1 16 0" /><path d="M4 12v4a2 2 0 0 0 2 2h1v-6H4Zm16 0v4a2 2 0 0 1-2 2h-1v-6h3Z" /></>,
-    arrow: <path d="M5 12h14m-5-5 5 5-5 5" />,
+    arrow: <path d="M4 12h15m-6-6 6 6-6 6" strokeWidth="2.6" />,
     whatsapp: <><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.5-4.1A8 8 0 1 1 20 11.5Z" /><path d="M9.4 8.7c.3 2.3 2 4 4.3 4.7" /></>,
     menu: <path d="M4 7h16M4 12h16M4 17h16" />,
     close: <path d="m6 6 12 12M18 6 6 18" />,
@@ -33,8 +33,10 @@ function Icon({ name, size = 20 }: { name: IconName; size?: number }) {
     chip: <><rect x="7" y="7" width="10" height="10" rx="2" /><path d="M9 1v4M15 1v4M9 19v4M15 19v4M1 9h4M1 15h4M19 9h4M19 15h4" /><path d="M10 10h4v4h-4z" /></>,
     code: <><path d="m8 9-3 3 3 3M16 9l3 3-3 3M14 5l-4 14" /></>,
     money: <><rect x="3" y="6" width="18" height="12" rx="2" /><path d="M7 10h.01M17 14h.01" /><circle cx="12" cy="12" r="2" /></>,
+    instagram: <><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none" /></>,
+    facebook: <path d="M13.8 22v-8h2.8l.4-3.2h-3.2V8.7c0-.9.3-1.6 1.7-1.6H17V4.2c-.7-.1-1.5-.2-2.3-.2-2.7 0-4.5 1.6-4.5 4.6v2.2H7.5V14h2.7v8h3.6Z" fill="currentColor" stroke="none" />,
   }
-  return <svg {...common}>{paths[name]}</svg>
+  return <svg {...common} className={className}>{paths[name]}</svg>
 }
 
 function useSimpleRouter() {
@@ -86,8 +88,11 @@ function trackWhatsappClick(source: string, course?: Course) {
 
 function Brand({ navigate }: { navigate: (href: string) => void }) {
   return <InternalLink href="/" navigate={navigate} className="brand">
-    <span className="brand-mark">CTI</span>
-    <span className="brand-copy"><strong>{siteConfig.brand.fullName}</strong><small>Cursos técnicos presenciais</small></span>
+    <img
+      className="brand-logo"
+      src="/assets/brand/logos/ChatGPT%20Image%2023%20de%20set.%20de%202026,%2010_28_28.png"
+      alt="CTI — Centro Técnico Integrado"
+    />
   </InternalLink>
 }
 
@@ -105,12 +110,24 @@ function Header({ navigate, course }: { navigate: (href: string) => void; course
       <nav className="desktop-nav" aria-label="Navegação principal">
         {items.map(([label, href]) => <InternalLink key={href} href={href} navigate={navigate}>{label}</InternalLink>)}
       </nav>
-      {course ? <a className="button button-yellow header-cta" href={whatsapp} target="_blank" rel="noreferrer" onClick={() => trackWhatsappClick('header_desktop', course)}>Quero me inscrever <Icon name="arrow" size={18} /></a>
+      <div className="header-socials" aria-label="Redes sociais">
+        <a className="social-link" href={siteConfig.contact.instagramUrl} target="_blank" rel="noreferrer" aria-label="Instagram do CTI">
+          <Icon name="instagram" size={21} />
+        </a>
+        <a className="social-link" href={siteConfig.contact.facebookUrl} aria-label="Facebook do CTI">
+          <Icon name="facebook" size={21} />
+        </a>
+      </div>
+      {course ? <a className="button button-yellow header-cta" href={whatsapp} target="_blank" rel="noreferrer" onClick={() => trackWhatsappClick('header_desktop', course)}>Quero me inscrever <Icon name="arrow" size={18} className="button-arrow-icon" /></a>
         : <InternalLink className="button button-yellow header-cta" href="/#cursos" navigate={navigate}>Ver cursos <Icon name="arrow" size={18} /></InternalLink>}
       <button className="menu-button" onClick={() => setMenuOpen(v => !v)} aria-label="Abrir menu"><Icon name={menuOpen ? 'close' : 'menu'} size={24} /></button>
     </div>
     {menuOpen && <div className="mobile-nav">
       {items.map(([label, href]) => <InternalLink key={href} href={href} navigate={navigate} onClick={() => setMenuOpen(false)}>{label}</InternalLink>)}
+      <div className="mobile-socials" aria-label="Redes sociais">
+        <a className="social-link" href={siteConfig.contact.instagramUrl} target="_blank" rel="noreferrer" aria-label="Instagram do CTI"><Icon name="instagram" size={20} /></a>
+        <a className="social-link" href={siteConfig.contact.facebookUrl} aria-label="Facebook do CTI"><Icon name="facebook" size={20} /></a>
+      </div>
       {course ? <a className="button button-yellow" href={whatsapp} target="_blank" rel="noreferrer" onClick={() => trackWhatsappClick('header_mobile', course)}>Quero me inscrever</a>
         : <InternalLink className="button button-yellow" href="/#cursos" navigate={navigate} onClick={() => setMenuOpen(false)}>Ver cursos</InternalLink>}
     </div>}
@@ -162,7 +179,7 @@ function CourseCard({ course, navigate }: { course: Course; navigate: (href: str
         <span><Icon name="clock" size={16} /> {course.duration}</span>
         <span><Icon name="money" size={16} /> {course.price}</span>
       </div>
-      <InternalLink className="catalog-link" href={`/cursos/${course.slug}`} navigate={navigate}>Conhecer o curso <Icon name="arrow" size={17} /></InternalLink>
+      <InternalLink className="catalog-link" href={`/cursos/${course.slug}`} navigate={navigate}>Conhecer o curso <Icon name="arrow" size={17} className="link-arrow-icon" /></InternalLink>
     </div>
   </article>
 }
@@ -191,7 +208,7 @@ function HomePage({ navigate }: { navigate: (href: string) => void }) {
 
     <section className="section structure-section" id="estrutura"><div className="container structure-grid"><div className="structure-visual"><div className="structure-phone"><Icon name="tools" size={56} /></div><div className="bench-line"><span /><span /><span /></div><span className="structure-badge"><Icon name="bolt" size={16} /> Formação técnica presencial</span></div><div className="section-copy"><span className="section-label">CENTRO TÉCNICO INTEGRADO</span><h2>Cursos em diferentes áreas de manutenção eletrônica</h2><p>Do reparo de celulares à programação de EPROM/BIOS e leitura de BoardView, o catálogo reúne formações com diferentes níveis de investimento e duração.</p><div className="mini-features"><span><Icon name="check" size={18} /> Celulares e computadores</span><span><Icon name="check" size={18} /> Notebooks e reparo de placas</span><span><Icon name="check" size={18} /> EPROM, BIOS, esquemas elétricos e BoardView</span></div></div></div></section>
 
-    <section className="final-cta home-final"><div className="container final-cta-inner"><div><span className="section-label yellow">ENCONTRE SEU CURSO</span><h2>Veja todas as formações e escolha por onde começar</h2><p>Abra a página do curso para conferir descrição, duração, investimento e falar com a equipe do CTI.</p></div><InternalLink className="button button-yellow" href="/#cursos" navigate={navigate}>Ver os cursos <Icon name="arrow" size={20} /></InternalLink></div></section>
+    <section className="final-cta home-final"><div className="container final-cta-inner"><div><span className="section-label yellow">ENCONTRE SEU CURSO</span><h2>Veja todas as formações e escolha por onde começar</h2><p>Abra a página do curso para conferir descrição, duração, investimento e falar com a equipe do CTI.</p></div><InternalLink className="button button-yellow" href="/#cursos" navigate={navigate}>Ver os cursos <Icon name="arrow" size={20} className="button-arrow-icon" /></InternalLink></div></section>
   </main><Footer navigate={navigate} /><a className="floating-whatsapp" href={whatsapp} target="_blank" rel="noreferrer" aria-label="Falar no WhatsApp" onClick={() => trackWhatsappClick('home_floating')}><Icon name="whatsapp" size={26} /></a></div>
 }
 
