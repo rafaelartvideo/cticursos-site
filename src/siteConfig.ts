@@ -10,6 +10,11 @@ export type Course = {
   description: string
   shortDescription: string
   highlights: string[]
+  curriculum?: {
+    title: string
+    subtitle: string
+    topics: string[]
+  }[]
   icon: CourseIcon
   featured?: boolean
   whatsappMessage: string
@@ -23,9 +28,40 @@ export const courses: Course[] = [
     price: 'R$ 1.200,00',
     duration: '2 semanas',
     dailyHours: '3 horas por dia',
-    description: 'Aprenda os conceitos e técnicas essenciais para a manutenção de aparelhos celulares, incluindo diagnósticos, substituição de peças e atualizações de software.',
-    shortDescription: 'Diagnóstico, substituição de peças e atualizações de software em aparelhos celulares.',
-    highlights: ['Diagnóstico de aparelhos celulares', 'Substituição de peças', 'Atualizações de software'],
+    description: 'Formação do básico ao avançado, cobrindo rotina da assistência técnica, segurança, equipamentos de bancada, medições e abertura de smartphones.',
+    shortDescription: 'Do básico ao avançado: gestão da assistência, equipamentos de bancada e abertura de smartphones.',
+    highlights: ['Gestão e rotina da assistência técnica', 'Equipamentos e medições de bancada', 'Abertura e periféricos de smartphones'],
+    curriculum: [
+      {
+        title: 'Suporte e gestão',
+        subtitle: 'Organização e rotina da assistência técnica',
+        topics: [
+          'Suporte técnico e fornecedores',
+          'Gestão da assistência técnica',
+          'Checklist de atendimento e serviço',
+          'Direitos, deveres, IMEI e serviços proibidos',
+        ],
+      },
+      {
+        title: 'Equipamentos',
+        subtitle: 'Segurança, bancada e instrumentos de medição',
+        topics: [
+          'Eletricidade estática, proteção e EPI',
+          'Estação de retrabalho e ferro de solda',
+          'Fonte assimétrica e multímetro digital',
+          'Microscópio, osciloscópio, separadoras e box',
+        ],
+      },
+      {
+        title: 'Abertura dos dispositivos',
+        subtitle: 'Desmontagem e identificação dos componentes',
+        topics: [
+          'Desmontagem de diferentes marcas e modelos',
+          'Identificação dos periféricos do smartphone',
+          'Equipamentos e insumos para prestação de serviço',
+        ],
+      },
+    ],
     icon: 'phone',
     featured: true,
     whatsappMessage: 'Olá! Quero saber mais sobre o curso de Manutenção de Celulares do CTI.',

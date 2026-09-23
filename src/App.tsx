@@ -282,7 +282,29 @@ function CoursePage({ navigate, course }: { navigate: (href: string) => void; co
 
     <section className="section light" id="curso"><div className="container two-col"><div className="section-copy"><h2>Sobre o curso</h2><p>{course.description}</p></div><div className="check-panel">{course.highlights.map(text => <div className="check-row" key={text}><span><Icon name="check" size={18} /></span><p>{text}</p></div>)}</div></div></section>
 
-    <section className="section modules-section" id="conteudo"><div className="container"><div className="section-heading centered"><span className="section-label">CONTEÚDO EM DESTAQUE</span><h2>Principais pontos da formação</h2><p>Os tópicos abaixo foram organizados a partir da descrição informada para este curso.</p></div><div className="modules-grid course-highlights-grid">{course.highlights.map((title,index) => <article className="module-card" key={title}><span>TÓPICO {String(index+1).padStart(2,'0')}</span><h3>{title}</h3><p>Parte central da proposta desta formação do CTI.</p></article>)}</div></div></section>
+    <section className="section modules-section" id="conteudo"><div className="container">
+      {course.curriculum?.length ? <>
+        <div className="section-heading centered curriculum-heading">
+          <span className="section-label">MANUAL DO TÉCNICO</span>
+          <h2>Do básico ao avançado</h2>
+          <p>Conteúdo organizado em três módulos para desenvolver visão de atendimento, domínio da bancada e segurança na abertura dos aparelhos.</p>
+        </div>
+        <div className="curriculum-grid">
+          {course.curriculum.map((module,index) => <article className="curriculum-module" key={module.title}>
+            <div className="curriculum-module-head">
+              <span className="curriculum-number">{String(index+1).padStart(2,'0')}</span>
+              <div><small>MÓDULO</small><h3>{module.title}</h3><p>{module.subtitle}</p></div>
+            </div>
+            <div className="curriculum-topics">
+              {module.topics.map(topic => <div className="curriculum-topic" key={topic}><Icon name="check" size={16} /><span>{topic}</span></div>)}
+            </div>
+          </article>)}
+        </div>
+      </> : <>
+        <div className="section-heading centered"><span className="section-label">CONTEÚDO EM DESTAQUE</span><h2>Principais pontos da formação</h2><p>Conheça os principais temas trabalhados nesta formação.</p></div>
+        <div className="modules-grid course-highlights-grid">{course.highlights.map((title,index) => <article className="module-card" key={title}><span>TÓPICO {String(index+1).padStart(2,'0')}</span><h3>{title}</h3><p>Parte central da proposta desta formação do CTI.</p></article>)}</div>
+      </>}
+    </div></section>
 
     <section className="section dark" id="inscricao"><div className="container enrollment-grid"><div><span className="section-label yellow">INSCRIÇÕES</span><h2>Pronto para começar?</h2><p className="muted-light">Fale com a equipe do CTI para consultar a próxima turma, os horários disponíveis e receber as orientações para inscrição.</p></div><aside className="enrollment-card"><span className="mini-label">FALE COM O CTI</span><h3>Quero fazer este curso</h3><p>Entre em contato para confirmar disponibilidade e concluir sua inscrição.</p><a className="button button-yellow full" href={whatsappUrl} target="_blank" rel="noreferrer" onClick={() => trackWhatsappClick('course_enrollment', course)}><Icon name="whatsapp" size={19} /> Falar com o CTI</a><small>Mensagem preparada para este curso.</small></aside></div></section>
 
