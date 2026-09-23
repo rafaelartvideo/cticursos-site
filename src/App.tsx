@@ -4,7 +4,7 @@ import { courses, getCourseBySlug, siteConfig, type Course, type CourseIcon } fr
 type IconName =
   | 'check' | 'tools' | 'support' | 'arrow' | 'whatsapp' | 'menu' | 'close'
   | 'clock' | 'users' | 'map' | 'book' | 'home' | 'phone' | 'bolt' | 'shield'
-  | 'laptop' | 'desktop' | 'chip' | 'code' | 'money' | 'instagram' | 'facebook'
+  | 'laptop' | 'desktop' | 'chip' | 'code' | 'money' | 'instagram' | 'facebook' | 'check-solid'
 
 function Icon({ name, size = 20, className }: { name: IconName; size?: number; className?: string }) {
   const common = {
@@ -14,6 +14,7 @@ function Icon({ name, size = 20, className }: { name: IconName; size?: number; c
   }
   const paths: Record<IconName, ReactNode> = {
     check: <path d="m5 12 4 4L19 6" />,
+    'check-solid': <><circle cx="12" cy="12" r="10" fill="currentColor" stroke="none" /><path d="m7.8 12.1 2.6 2.6 5.8-6" stroke="#fff" strokeWidth="2.35" strokeLinecap="round" strokeLinejoin="round" /></>,
     tools: <><path d="M14.7 6.3a4 4 0 0 0-5-5l2.1 2.1-2.4 2.4-2.1-2.1a4 4 0 0 0 5 5l6.8 6.8a2 2 0 0 1-2.8 2.8l-6.8-6.8" /><path d="m5 19 4-4" /></>,
     support: <><path d="M4 12a8 8 0 0 1 16 0" /><path d="M4 12v4a2 2 0 0 0 2 2h1v-6H4Zm16 0v4a2 2 0 0 1-2 2h-1v-6h3Z" /></>,
     arrow: <path d="M4 12h15m-6-6 6 6-6 6" strokeWidth="2.6" />,
@@ -190,12 +191,22 @@ function HomePage({ navigate }: { navigate: (href: string) => void }) {
     <section className="hero home-hero"><div className="hero-glow hero-glow-one" /><div className="hero-glow hero-glow-two" />
       <div className="container hero-grid"><div className="hero-copy"><span className="eyebrow">CTI • CENTRO TÉCNICO INTEGRADO</span><h1>Formação técnica para transformar conhecimento em prática</h1><p>Cursos presenciais em manutenção e reparo técnico, com formações objetivas para desenvolver conhecimento aplicável no dia a dia.</p>
         <div className="hero-actions"><InternalLink className="button button-yellow" href="/#cursos" navigate={navigate}>Conhecer os cursos <Icon name="arrow" size={18} /></InternalLink><a className="button button-ghost" href={whatsapp} target="_blank" rel="noreferrer" onClick={() => trackWhatsappClick('home_hero')}><Icon name="whatsapp" size={19} /> Falar com o CTI</a></div>
-        <div className="hero-proof"><span><Icon name="check" size={16} /> Cursos presenciais</span><span><Icon name="check" size={16} /> 3 horas por dia</span><span><Icon name="check" size={16} /> 6 formações disponíveis</span></div>
+        <div className="hero-proof">
+          <span className="hero-proof-item"><Icon name="check-solid" size={19} /> Cursos presenciais</span>
+          <span className="hero-proof-item"><Icon name="check-solid" size={19} /> 3 horas por dia</span>
+          <span className="hero-proof-item"><Icon name="check-solid" size={19} /> {courses.length} formações disponíveis</span>
+        </div>
       </div><HeroVisual /></div>
     </section>
 
     <section className="home-trust"><div className="container trust-grid">
-      {[['Formação prática','Conteúdo voltado à rotina técnica.','tools'],['Turmas presenciais','Aprendizado com acompanhamento durante as aulas.','users'],['Cursos objetivos','Durações de 7 dias a 2 semanas.','clock'],['Atendimento direto','Informações e inscrições pelo WhatsApp.','whatsapp']].map(([title,text,icon]) => <article key={title}><span className="icon-box"><Icon name={icon as IconName} size={22} /></span><div><h3>{title}</h3><p>{text}</p></div></article>)}
+      {[
+        ['Formação prática','Conteúdo aplicado à rotina técnica, com foco no que realmente será usado no dia a dia.','tools'],
+        ['Turmas presenciais','Acompanhamento durante as aulas para evoluir com mais segurança e aproveitamento.','users'],
+        ['Cursos objetivos','Formações intensivas, com duração de 7 dias a 2 semanas e aprendizado direto ao ponto.','clock'],
+        ['Suporte por 90 dias','Após a conclusão, o aluno conta com 90 dias de suporte para tirar dúvidas e reforçar o aprendizado.','support'],
+        ['Atendimento direto','Informações e inscrições com atendimento rápido pelo WhatsApp.','whatsapp'],
+      ].map(([title,text,icon]) => <article className="trust-card" key={title}><span className="icon-box trust-icon"><Icon name={icon as IconName} size={24} /></span><div><h3>{title}</h3><p>{text}</p></div></article>)}
     </div></section>
 
     <section className="section modules-section" id="cursos"><div className="container"><div className="section-heading centered"><span className="section-label">CURSOS CTI</span><h2>Escolha sua próxima formação</h2><p>Conheça os cursos disponíveis, compare duração e investimento e abra a página completa de cada formação.</p></div>
