@@ -101,7 +101,6 @@ function Brand({ navigate }: { navigate: (href: string) => void }) {
 
 function Header({ navigate, course }: { navigate: (href: string) => void; course?: Course }) {
   const [menuOpen, setMenuOpen] = useState(false)
-  const whatsapp = makeWhatsapp(course?.whatsappMessage ?? siteConfig.contact.whatsappMessage)
   const courseBase = course ? `/cursos/${course.slug}` : ''
   const items = course
     ? [['Início', '/'], ['Sobre', `${courseBase}#curso`], ['Conteúdo', `${courseBase}#conteudo`], ['Inscrição', `${courseBase}#inscricao`], ['Dúvidas', `${courseBase}#duvidas`]]
@@ -124,8 +123,7 @@ function Header({ navigate, course }: { navigate: (href: string) => void; course
           <Icon name="map" size={21} />
         </a>
       </div>
-      {course ? <a className="button button-yellow header-cta" href={whatsapp} target="_blank" rel="noreferrer" onClick={() => trackWhatsappClick('header_desktop', course)}>Quero me inscrever <Icon name="arrow" size={18} className="button-arrow-icon" /></a>
-        : <InternalLink className="button button-yellow header-cta" href="/#cursos" navigate={navigate}>Ver cursos <Icon name="arrow" size={18} /></InternalLink>}
+      {!course && <InternalLink className="button button-yellow header-cta" href="/#cursos" navigate={navigate}>Ver cursos <Icon name="arrow" size={18} /></InternalLink>}
       <button className="menu-button" onClick={() => setMenuOpen(v => !v)} aria-label="Abrir menu"><Icon name={menuOpen ? 'close' : 'menu'} size={24} /></button>
     </div>
     {menuOpen && <div className="mobile-nav">
@@ -135,8 +133,7 @@ function Header({ navigate, course }: { navigate: (href: string) => void; course
         <a className="social-link" href={siteConfig.contact.facebookUrl} target="_blank" rel="noreferrer" aria-label="Facebook do CTI"><Icon name="facebook" size={20} /></a>
         <a className="social-link" href={siteConfig.contact.mapsUrl} target="_blank" rel="noreferrer" aria-label="Localização do CTI no Google Maps"><Icon name="map" size={20} /></a>
       </div>
-      {course ? <a className="button button-yellow" href={whatsapp} target="_blank" rel="noreferrer" onClick={() => trackWhatsappClick('header_mobile', course)}>Quero me inscrever</a>
-        : <InternalLink className="button button-yellow" href="/#cursos" navigate={navigate} onClick={() => setMenuOpen(false)}>Ver cursos</InternalLink>}
+      {!course && <InternalLink className="button button-yellow" href="/#cursos" navigate={navigate} onClick={() => setMenuOpen(false)}>Ver cursos</InternalLink>}
     </div>}
   </header>
 }
@@ -264,23 +261,26 @@ function CoursePage({ navigate, course }: { navigate: (href: string) => void; co
   const [openFaq, setOpenFaq] = useState<number | null>(0)
   const whatsappUrl = makeWhatsapp(course.whatsappMessage)
   const faq = [
+    { q: 'O curso oferece 90 dias de suporte?', a: 'Sim. Após a conclusão, o aluno conta com 90 dias de suporte para tirar dúvidas relacionadas ao conteúdo estudado e reforçar o aprendizado.' },
     { q: 'O curso é presencial?', a: 'Sim. Esta formação é presencial, com acompanhamento durante as aulas e foco em aprendizado prático.' },
     { q: 'Qual é a duração e a carga diária?', a: `A formação dura ${course.duration}, com ${course.dailyHours} de aula.` },
     { q: 'Qual é o valor do curso?', a: `O valor desta formação é ${course.price}. Para confirmar formas de pagamento e condições da próxima turma, fale diretamente com a equipe do CTI.` },
     { q: 'O que vou aprender durante a formação?', a: `Entre os principais pontos estão: ${course.highlights.join('; ')}.` },
-    { q: 'Como funciona o suporte após o curso?', a: 'Após a conclusão, o aluno conta com 90 dias de suporte para tirar dúvidas relacionadas ao conteúdo estudado e reforçar o aprendizado.' },
     { q: 'Como faço minha inscrição?', a: 'Use o botão de WhatsApp desta página para falar com a equipe do CTI, consultar a próxima turma e receber as orientações para inscrição.' },
   ]
   return <div className="site-shell"><Header navigate={navigate} course={course} /><main id="top">
     <div className="course-breadcrumb"><div className="container"><InternalLink href="/" navigate={navigate}><Icon name="home" size={14} /> Início</InternalLink><span>/</span><InternalLink href="/#cursos" navigate={navigate}>Cursos</InternalLink><span>/</span><strong>{course.title}</strong></div></div>
 
-    <section className="hero"><div className="hero-glow hero-glow-one" /><div className="hero-glow hero-glow-two" /><div className="container hero-grid"><div className="hero-copy"><span className="eyebrow">CURSO PRESENCIAL • CTI</span><h1>{course.title}</h1><p>{course.description}</p><div className="hero-actions"><a className="button button-yellow" href={whatsappUrl} target="_blank" rel="noreferrer" onClick={() => trackWhatsappClick('course_hero_enroll', course)}>Quero me inscrever <Icon name="arrow" size={18} /></a><a className="button button-ghost" href={whatsappUrl} target="_blank" rel="noreferrer" onClick={() => trackWhatsappClick('course_hero_questions', course)}><Icon name="whatsapp" size={19} /> Tirar dúvidas</a></div></div><div className="course-hero-side"><HeroVisual course={course} /><div className="course-price-highlight"><span>VALOR DO CURSO</span><strong>{course.price}</strong></div></div></div></section>
+    <section className="hero"><div className="hero-glow hero-glow-one" /><div className="hero-glow hero-glow-two" /><div className="container hero-grid"><div className="hero-copy"><span className="eyebrow">CURSO PRESENCIAL • CTI</span><h1>{course.title}</h1><p>{course.description}</p><div className="hero-actions"><a className="button button-yellow" href={whatsappUrl} target="_blank" rel="noreferrer" onClick={() => trackWhatsappClick('course_hero_enroll', course)}>Quero me inscrever <Icon name="arrow" size={18} /></a><a className="button button-ghost" href={whatsappUrl} target="_blank" rel="noreferrer" onClick={() => trackWhatsappClick('course_hero_questions', course)}><Icon name="whatsapp" size={19} /> Tirar dúvidas</a></div></div><div className="course-hero-side"><HeroVisual course={course} /><div className="course-price-highlight">
+  <div className="course-price-label"><span className="course-price-icon"><Icon name="money" size={20} /></span><div><span>VALOR DO CURSO</span><small>Formação presencial</small></div></div>
+  <strong>{course.price}</strong>
+</div></div></div></section>
 
     <section className="benefits course-summary" aria-label="Informações do curso"><div className="container benefit-grid">
       <article className="benefit-item"><Icon name="map" size={22} /><div><span>Modalidade</span><strong>Presencial</strong></div></article>
       <article className="benefit-item"><Icon name="clock" size={22} /><div><span>Duração</span><strong>{course.duration}</strong></div></article>
       <article className="benefit-item"><Icon name="book" size={22} /><div><span>Carga diária</span><strong>{course.dailyHours}</strong></div></article>
-      <article className="benefit-item"><Icon name="money" size={22} /><div><span>Valor</span><strong>{course.price}</strong></div></article>
+      <article className="benefit-item"><Icon name="support" size={22} /><div><span>Suporte</span><strong>90 dias após o curso</strong></div></article>
     </div></section>
 
     <section className="section light" id="curso"><div className="container two-col"><div className="section-copy"><h2>Sobre o curso</h2><p>{course.description}</p></div><div className="check-panel">{course.highlights.map(text => <div className="check-row" key={text}><span><Icon name="check" size={18} /></span><p>{text}</p></div>)}</div></div></section>
