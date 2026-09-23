@@ -1436,3 +1436,87 @@ body {
     width: 210px;
   }
 }
+
+
+/* Curso — menos repetição e valor em destaque */
+
+/* O lado direito do hero passa a agrupar imagem + preço */
+.course-hero-side {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-self: center;
+  width: 100%;
+}
+
+.course-hero-side .hero-card {
+  width: 100%;
+}
+
+.course-price-highlight {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 18px 22px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #ffdd54 0%, #ffc400 62%, #f4b500 100%);
+  border: 1px solid rgba(255, 232, 125, .8);
+  box-shadow: 0 14px 30px rgba(246, 189, 29, .18);
+  color: #061c42;
+}
+
+.course-price-highlight span {
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+.course-price-highlight strong {
+  font-size: 25px;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: -.04em;
+}
+
+/* Sobre o curso volta a ter presença de título principal */
+#curso .section-copy h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+/* Cards da home voltam a ficar limpos: imagem -> título -> descrição */
+.catalog-card .catalog-content {
+  padding-top: 24px;
+}
+
+/* A seção de inscrição fica focada só na ação */
+#inscricao .enrollment-grid {
+  align-items: center;
+}
+
+#inscricao .enrollment-card {
+  padding: 30px;
+}
+
+#inscricao .enrollment-card .button {
+  margin-top: 22px;
+}
+
+@media (max-width: 980px) {
+  .course-hero-side {
+    width: min(560px, 100%);
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .course-price-highlight {
+    padding: 16px 18px;
+  }
+
+  .course-price-highlight strong {
+    font-size: 22px;
+  }
+}
