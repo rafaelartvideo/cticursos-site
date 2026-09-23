@@ -1631,3 +1631,54 @@ body {
     font-size: 10px;
   }
 }
+
+
+/* Home/curso — certificado e header limpo */
+
+/* Check do hero da home em azul escuro */
+.home-hero .hero-proof .hero-proof-item svg {
+  color: #082b66;
+  filter: drop-shadow(0 2px 5px rgba(2, 24, 58, .22));
+}
+
+/* A faixa do curso agora comporta cinco informações */
+.course-summary .benefit-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+/* Suporte e certificado seguem o mesmo padrão visual dos demais */
+.course-summary .benefit-item:last-child strong,
+.course-summary .benefit-item:nth-last-child(2) strong {
+  color: var(--navy);
+}
+
+.course-summary .benefit-item:last-child > svg,
+.course-summary .benefit-item:nth-last-child(2) > svg {
+  color: var(--blue);
+}
+
+@media (max-width: 980px) {
+  .course-summary .benefit-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .course-summary .benefit-item:nth-child(3)::after {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .course-summary .benefit-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .course-summary .benefit-item,
+  .course-summary .benefit-item:nth-child(2n) {
+    min-height: 0;
+    padding: 16px 4px;
+  }
+
+  .course-summary .benefit-item::after {
+    display: none !important;
+  }
+}

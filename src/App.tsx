@@ -123,7 +123,6 @@ function Header({ navigate, course }: { navigate: (href: string) => void; course
           <Icon name="map" size={21} />
         </a>
       </div>
-      {!course && <InternalLink className="button button-yellow header-cta" href="/#cursos" navigate={navigate}>Ver cursos <Icon name="arrow" size={18} /></InternalLink>}
       <button className="menu-button" onClick={() => setMenuOpen(v => !v)} aria-label="Abrir menu"><Icon name={menuOpen ? 'close' : 'menu'} size={24} /></button>
     </div>
     {menuOpen && <div className="mobile-nav">
@@ -133,7 +132,6 @@ function Header({ navigate, course }: { navigate: (href: string) => void; course
         <a className="social-link" href={siteConfig.contact.facebookUrl} target="_blank" rel="noreferrer" aria-label="Facebook do CTI"><Icon name="facebook" size={20} /></a>
         <a className="social-link" href={siteConfig.contact.mapsUrl} target="_blank" rel="noreferrer" aria-label="Localização do CTI no Google Maps"><Icon name="map" size={20} /></a>
       </div>
-      {!course && <InternalLink className="button button-yellow" href="/#cursos" navigate={navigate} onClick={() => setMenuOpen(false)}>Ver cursos</InternalLink>}
     </div>}
   </header>
 }
@@ -238,7 +236,7 @@ function HomePage({ navigate }: { navigate: (href: string) => void }) {
       {[
         ['Formação prática','Conteúdo aplicado à rotina técnica, com foco no que realmente será usado no dia a dia.','tools'],
         ['Turmas presenciais','Acompanhamento durante as aulas para evoluir com mais segurança e aproveitamento.','users'],
-        ['Cursos objetivos','Formações intensivas, com duração de 7 dias a 2 semanas e aprendizado direto ao ponto.','clock'],
+        ['Certificado','Ao concluir a formação, o aluno recebe certificado de conclusão do curso.','shield'],
         ['Suporte por 90 dias','Após a conclusão, o aluno conta com 90 dias de suporte para tirar dúvidas e reforçar o aprendizado.','support'],
       ].map(([title,text,icon]) => <article className="trust-item" key={title}><span className="trust-icon"><Icon name={icon as IconName} size={23} /></span><div><h3>{title}</h3><p>{text}</p></div></article>)}
     </div></section>
@@ -281,6 +279,7 @@ function CoursePage({ navigate, course }: { navigate: (href: string) => void; co
       <article className="benefit-item"><Icon name="clock" size={22} /><div><span>Duração</span><strong>{course.duration}</strong></div></article>
       <article className="benefit-item"><Icon name="book" size={22} /><div><span>Carga diária</span><strong>{course.dailyHours}</strong></div></article>
       <article className="benefit-item"><Icon name="support" size={22} /><div><span>Suporte</span><strong>90 dias após o curso</strong></div></article>
+      <article className="benefit-item"><Icon name="shield" size={22} /><div><span>Certificação</span><strong>Certificado de conclusão</strong></div></article>
     </div></section>
 
     <section className="section light" id="curso"><div className="container two-col"><div className="section-copy"><h2>Sobre o curso</h2><p>{course.description}</p></div><div className="check-panel">{course.highlights.map(text => <div className="check-row" key={text}><span><Icon name="check" size={18} /></span><p>{text}</p></div>)}</div></div></section>
