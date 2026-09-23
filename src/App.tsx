@@ -74,6 +74,16 @@ function makeWhatsapp(message: string) {
   return `https://wa.me/${siteConfig.contact.whatsappNumber}?text=${encodeURIComponent(message)}`
 }
 
+function trackWhatsappClick(source: string, course?: Course) {
+  const gtag = (window as Window & { gtag?: (...args: unknown[]) => void }).gtag
+  gtag?.('event', 'generate_lead', {
+    lead_source: 'whatsapp',
+    click_source: source,
+    course_name: course?.title ?? 'Institucional',
+    course_slug: course?.slug ?? 'home',
+  })
+}
+
 function Brand({ navigate }: { navigate: (href: string) => void }) {
   return <InternalLink href="/" navigate={navigate} className="brand">
     <span className="brand-mark">CTI</span>
@@ -95,13 +105,13 @@ function Header({ navigate, course }: { navigate: (href: string) => void; course
       <nav className="desktop-nav" aria-label="Navegação principal">
         {items.map(([label, href]) => <InternalLink key={href} href={href} navigate={navigate}>{label}</InternalLink>)}
       </nav>
-      {course ? <a className="button button-yellow header-cta" href={whatsapp} target="_blank" rel="noreferrer">Quero me inscrever <Icon name="arrow" size={18} /></a>
+      {course ? <a className="button button-yellow header-cta" href={whatsapp} target="_blank" rel="noreferrer" onClick={() => trackWhatsappClick('header_desktop', course)}>Quero me inscrever <Icon name="arrow" size={18} /></a>
         : <InternalLink className="button button-yellow header-cta" href="/#cursos" navigate={navigate}>Ver cursos <Icon name="arrow" size={18} /></InternalLink>}
       <button className="menu-button" onClick={() => setMenuOpen(v => !v)} aria-label="Abrir menu"><Icon name={menuOpen ? 'close' : 'menu'} size={24} /></button>
     </div>
     {menuOpen && <div className="mobile-nav">
       {items.map(([label, href]) => <InternalLink key={href} href={href} navigate={navigate} onClick={() => setMenuOpen(false)}>{label}</InternalLink>)}
-      {course ? <a className="button button-yellow" href={whatsapp} target="_blank" rel="noreferrer">Quero me inscrever</a>
+      {course ? <a className="button button-yellow" href={whatsapp} target="_blank" rel="noreferrer" onClick={() => trackWhatsappClick('header_mobile', course)}>Quero me inscrever</a>
         : <InternalLink className="button button-yellow" href="/#cursos" navigate={navigate} onClick={() => setMenuOpen(false)}>Ver cursos</InternalLink>}
     </div>}
   </header>
@@ -116,7 +126,7 @@ function Footer({ navigate }: { navigate: (href: string) => void }) {
         <InternalLink href="/" navigate={navigate}>Início</InternalLink>
         <InternalLink href="/#cursos" navigate={navigate}>Cursos</InternalLink>
         <a href={siteConfig.contact.instagramUrl} target="_blank" rel="noreferrer">{siteConfig.brand.instagram}</a>
-        <a href={whatsapp} target="_blank" rel="noreferrer">WhatsApp</a>
+        <a href={whatsapp} target="_blank" rel="noreferrer" onClick={() => trackWhatsappClick('footer')}>WhatsApp</a>
       </div>
     </div>
     <div className="container footer-bottom"><span>© {new Date().getFullYear()} CTI. Todos os direitos reservados.</span><span>Centro Técnico Integrado</span></div>
@@ -162,7 +172,7 @@ function HomePage({ navigate }: { navigate: (href: string) => void }) {
   return <div className="site-shell"><Header navigate={navigate} /><main>
     <section className="hero home-hero"><div className="hero-glow hero-glow-one" /><div className="hero-glow hero-glow-two" />
       <div className="container hero-grid"><div className="hero-copy"><span className="eyebrow">CTI • CENTRO TÉCNICO INTEGRADO</span><h1>Formação técnica para transformar conhecimento em prática</h1><p>Cursos presenciais em manutenção e reparo técnico, com formações objetivas para desenvolver conhecimento aplicável no dia a dia.</p>
-        <div className="hero-actions"><InternalLink className="button button-yellow" href="/#cursos" navigate={navigate}>Conhecer os cursos <Icon name="arrow" size={18} /></InternalLink><a className="button button-ghost" href={whatsapp} target="_blank" rel="noreferrer"><Icon name="whatsapp" size={19} /> Falar com o CTI</a></div>
+        <div className="hero-actions"><InternalLink className="button button-yellow" href="/#cursos" navigate={navigate}>Conhecer os cursos <Icon name="arrow" size={18} /></InternalLink><a className="button button-ghost" href={whatsapp} target="_blank" rel="noreferrer" onClick={() => trackWhatsappClick('home_hero')}><Icon name="whatsapp" size={19} /> Falar com o CTI</a></div>
         <div className="hero-proof"><span><Icon name="check" size={16} /> Cursos presenciais</span><span><Icon name="check" size={16} /> 3 horas por dia</span><span><Icon name="check" size={16} /> 6 formações disponíveis</span></div>
       </div><HeroVisual /></div>
     </section>
@@ -182,7 +192,7 @@ function HomePage({ navigate }: { navigate: (href: string) => void }) {
     <section className="section structure-section" id="estrutura"><div className="container structure-grid"><div className="structure-visual"><div className="structure-phone"><Icon name="tools" size={56} /></div><div className="bench-line"><span /><span /><span /></div><span className="structure-badge"><Icon name="bolt" size={16} /> Formação técnica presencial</span></div><div className="section-copy"><span className="section-label">CENTRO TÉCNICO INTEGRADO</span><h2>Cursos em diferentes áreas de manutenção eletrônica</h2><p>Do reparo de celulares à programação de EPROM/BIOS e leitura de BoardView, o catálogo reúne formações com diferentes níveis de investimento e duração.</p><div className="mini-features"><span><Icon name="check" size={18} /> Celulares e computadores</span><span><Icon name="check" size={18} /> Notebooks e reparo de placas</span><span><Icon name="check" size={18} /> EPROM, BIOS, esquemas elétricos e BoardView</span></div></div></div></section>
 
     <section className="final-cta home-final"><div className="container final-cta-inner"><div><span className="section-label yellow">ENCONTRE SEU CURSO</span><h2>Veja todas as formações e escolha por onde começar</h2><p>Abra a página do curso para conferir descrição, duração, investimento e falar com a equipe do CTI.</p></div><InternalLink className="button button-yellow" href="/#cursos" navigate={navigate}>Ver os cursos <Icon name="arrow" size={20} /></InternalLink></div></section>
-  </main><Footer navigate={navigate} /><a className="floating-whatsapp" href={whatsapp} target="_blank" rel="noreferrer" aria-label="Falar no WhatsApp"><Icon name="whatsapp" size={26} /></a></div>
+  </main><Footer navigate={navigate} /><a className="floating-whatsapp" href={whatsapp} target="_blank" rel="noreferrer" aria-label="Falar no WhatsApp" onClick={() => trackWhatsappClick('home_floating')}><Icon name="whatsapp" size={26} /></a></div>
 }
 
 function CoursePage({ navigate, course }: { navigate: (href: string) => void; course: Course }) {
@@ -197,7 +207,7 @@ function CoursePage({ navigate, course }: { navigate: (href: string) => void; co
   return <div className="site-shell"><Header navigate={navigate} course={course} /><main id="top">
     <div className="course-breadcrumb"><div className="container"><InternalLink href="/" navigate={navigate}><Icon name="home" size={14} /> Início</InternalLink><span>/</span><InternalLink href="/#cursos" navigate={navigate}>Cursos</InternalLink><span>/</span><strong>{course.title}</strong></div></div>
 
-    <section className="hero"><div className="hero-glow hero-glow-one" /><div className="hero-glow hero-glow-two" /><div className="container hero-grid"><div className="hero-copy"><span className="eyebrow">CURSO PRESENCIAL • CTI</span><h1>{course.title}</h1><p>{course.description}</p><div className="hero-actions"><a className="button button-yellow" href={whatsappUrl} target="_blank" rel="noreferrer">Quero me inscrever <Icon name="arrow" size={18} /></a><a className="button button-ghost" href={whatsappUrl} target="_blank" rel="noreferrer"><Icon name="whatsapp" size={19} /> Tirar dúvidas</a></div><div className="hero-proof"><span><Icon name="clock" size={16} /> {course.duration}</span><span><Icon name="check" size={16} /> {course.dailyHours}</span><span><Icon name="money" size={16} /> {course.price}</span></div></div><HeroVisual course={course} /></div></section>
+    <section className="hero"><div className="hero-glow hero-glow-one" /><div className="hero-glow hero-glow-two" /><div className="container hero-grid"><div className="hero-copy"><span className="eyebrow">CURSO PRESENCIAL • CTI</span><h1>{course.title}</h1><p>{course.description}</p><div className="hero-actions"><a className="button button-yellow" href={whatsappUrl} target="_blank" rel="noreferrer" onClick={() => trackWhatsappClick('course_hero_enroll', course)}>Quero me inscrever <Icon name="arrow" size={18} /></a><a className="button button-ghost" href={whatsappUrl} target="_blank" rel="noreferrer" onClick={() => trackWhatsappClick('course_hero_questions', course)}><Icon name="whatsapp" size={19} /> Tirar dúvidas</a></div><div className="hero-proof"><span><Icon name="clock" size={16} /> {course.duration}</span><span><Icon name="check" size={16} /> {course.dailyHours}</span><span><Icon name="money" size={16} /> {course.price}</span></div></div><HeroVisual course={course} /></div></section>
 
     <section className="benefits" aria-label="Informações do curso"><div className="container benefit-grid">
       <article className="benefit-card"><span className="icon-box"><Icon name="map" size={23} /></span><div><h3>Presencial</h3><p>Formação em turma presencial.</p></div></article>
@@ -210,14 +220,14 @@ function CoursePage({ navigate, course }: { navigate: (href: string) => void; co
 
     <section className="section modules-section" id="conteudo"><div className="container"><div className="section-heading centered"><span className="section-label">CONTEÚDO EM DESTAQUE</span><h2>Principais pontos da formação</h2><p>Os tópicos abaixo foram organizados a partir da descrição informada para este curso.</p></div><div className="modules-grid course-highlights-grid">{course.highlights.map((title,index) => <article className="module-card" key={title}><span>TÓPICO {String(index+1).padStart(2,'0')}</span><h3>{title}</h3><p>Parte central da proposta desta formação do CTI.</p></article>)}</div></div></section>
 
-    <section className="section dark" id="inscricao"><div className="container enrollment-grid"><div><span className="section-label yellow">INFORMAÇÕES DA FORMAÇÃO</span><h2>{course.duration} de curso, com {course.dailyHours}</h2><p className="muted-light">Entre em contato com a equipe do CTI para consultar a próxima turma, os horários disponíveis e as condições de inscrição.</p><div className="stats-grid"><div className="stat-card"><Icon name="map" /><span>Modalidade</span><strong>Presencial</strong></div><div className="stat-card"><Icon name="clock" /><span>Duração</span><strong>{course.duration}</strong></div><div className="stat-card"><Icon name="book" /><span>Por dia</span><strong>{course.dailyHours}</strong></div><div className="stat-card"><Icon name="money" /><span>Investimento</span><strong>{course.price}</strong></div></div></div><aside className="enrollment-card"><span className="mini-label">INSCRIÇÕES</span><h3>Quero fazer este curso</h3><p>Fale com o CTI para confirmar a próxima turma e receber as orientações para inscrição.</p><div className="price-block"><span>Investimento</span><strong>{course.price}</strong></div><a className="button button-yellow full" href={whatsappUrl} target="_blank" rel="noreferrer"><Icon name="whatsapp" size={19} /> Falar com o CTI</a><small>Mensagem preparada para este curso.</small></aside></div></section>
+    <section className="section dark" id="inscricao"><div className="container enrollment-grid"><div><span className="section-label yellow">INFORMAÇÕES DA FORMAÇÃO</span><h2>{course.duration} de curso, com {course.dailyHours}</h2><p className="muted-light">Entre em contato com a equipe do CTI para consultar a próxima turma, os horários disponíveis e as condições de inscrição.</p><div className="stats-grid"><div className="stat-card"><Icon name="map" /><span>Modalidade</span><strong>Presencial</strong></div><div className="stat-card"><Icon name="clock" /><span>Duração</span><strong>{course.duration}</strong></div><div className="stat-card"><Icon name="book" /><span>Por dia</span><strong>{course.dailyHours}</strong></div><div className="stat-card"><Icon name="money" /><span>Investimento</span><strong>{course.price}</strong></div></div></div><aside className="enrollment-card"><span className="mini-label">INSCRIÇÕES</span><h3>Quero fazer este curso</h3><p>Fale com o CTI para confirmar a próxima turma e receber as orientações para inscrição.</p><div className="price-block"><span>Investimento</span><strong>{course.price}</strong></div><a className="button button-yellow full" href={whatsappUrl} target="_blank" rel="noreferrer" onClick={() => trackWhatsappClick('course_enrollment', course)}><Icon name="whatsapp" size={19} /> Falar com o CTI</a><small>Mensagem preparada para este curso.</small></aside></div></section>
 
     <section className="section light" id="duvidas"><div className="container faq-wrap"><div className="section-heading centered"><span className="section-label">DÚVIDAS FREQUENTES</span><h2>Antes de se inscrever</h2><p>Informações essenciais da formação e do contato com o CTI.</p></div><div className="faq-list">{faq.map((item,index)=>{const open=openFaq===index;return <article className={`faq-item ${open?'open':''}`} key={item.q}><button onClick={()=>setOpenFaq(open?null:index)}><span>{item.q}</span><b>{open?'−':'+'}</b></button>{open&&<p>{item.a}</p>}</article>})}</div></div></section>
 
     <section className="related-courses section"><div className="container"><div className="section-heading centered"><span className="section-label">OUTROS CURSOS</span><h2>Continue explorando o CTI</h2></div><div className="related-grid">{courses.filter(item => item.slug !== course.slug).slice(0,3).map(item => <CourseCard key={item.slug} course={item} navigate={navigate} />)}</div></div></section>
 
-    <section className="final-cta"><div className="container final-cta-inner"><div><span className="section-label yellow">CTI • CENTRO TÉCNICO INTEGRADO</span><h2>Quer saber mais sobre {course.shortTitle}?</h2><p>Fale diretamente com a equipe para receber as informações da próxima turma.</p></div><a className="button button-yellow" href={whatsappUrl} target="_blank" rel="noreferrer"><Icon name="whatsapp" size={20} /> Falar com o CTI</a></div></section>
-  </main><Footer navigate={navigate} /><a className="floating-whatsapp" href={whatsappUrl} target="_blank" rel="noreferrer" aria-label="Falar no WhatsApp"><Icon name="whatsapp" size={26} /></a></div>
+    <section className="final-cta"><div className="container final-cta-inner"><div><span className="section-label yellow">CTI • CENTRO TÉCNICO INTEGRADO</span><h2>Quer saber mais sobre {course.shortTitle}?</h2><p>Fale diretamente com a equipe para receber as informações da próxima turma.</p></div><a className="button button-yellow" href={whatsappUrl} target="_blank" rel="noreferrer" onClick={() => trackWhatsappClick('course_final_cta', course)}><Icon name="whatsapp" size={20} /> Falar com o CTI</a></div></section>
+  </main><Footer navigate={navigate} /><a className="floating-whatsapp" href={whatsappUrl} target="_blank" rel="noreferrer" aria-label="Falar no WhatsApp" onClick={() => trackWhatsappClick('course_floating', course)}><Icon name="whatsapp" size={26} /></a></div>
 }
 
 function NotFound({ navigate }: { navigate: (href: string) => void }) {
