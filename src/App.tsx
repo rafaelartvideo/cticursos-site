@@ -287,13 +287,13 @@ function CoursePage({ navigate, course }: { navigate: (href: string) => void; co
         <div className="section-heading centered curriculum-heading">
           <span className="section-label">MANUAL DO TÉCNICO</span>
           <h2>Do básico ao avançado</h2>
-          <p>Conteúdo organizado em três módulos para desenvolver visão de atendimento, domínio da bancada e segurança na abertura dos aparelhos.</p>
+          <p>Conteúdo organizado em quatro módulos do Manual do Técnico.</p>
         </div>
         <div className="curriculum-grid">
           {course.curriculum.map((module,index) => <article className="curriculum-module" key={module.title}>
             <div className="curriculum-module-head">
               <span className="curriculum-number">{String(index+1).padStart(2,'0')}</span>
-              <div><small>MÓDULO</small><h3>{module.title}</h3><p>{module.subtitle}</p></div>
+              <div><small>MÓDULO</small><h3>{module.title}</h3>{module.subtitle && <p>{module.subtitle}</p>}</div>
             </div>
             <div className="curriculum-topics">
               {module.topics.map(topic => <div className="curriculum-topic" key={topic}><Icon name="check" size={16} /><span>{topic}</span></div>)}
