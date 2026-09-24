@@ -1799,9 +1799,10 @@ body {
 
 .curriculum-module {
   display: grid;
-  grid-template-columns: minmax(240px, 32%) 1fr;
-  gap: 48px;
-  padding: 34px 0;
+  grid-template-columns: 300px minmax(0, 560px);
+  justify-content: center;
+  gap: 56px;
+  padding: 36px 0;
   border-bottom: 1px solid #dfe8f4;
 }
 
@@ -1810,6 +1811,7 @@ body {
   grid-template-columns: 52px 1fr;
   gap: 16px;
   align-items: start;
+  justify-content: center;
 }
 
 .curriculum-number {
@@ -1880,13 +1882,23 @@ body {
   }
 
   .curriculum-module {
-    grid-template-columns: 1fr;
-    gap: 22px;
+    grid-template-columns: minmax(0, 680px);
+    justify-content: center;
+    gap: 24px;
     padding: 30px 0;
   }
 
+  .curriculum-module-head {
+    width: fit-content;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
   .curriculum-topics {
-    padding-left: 68px;
+    width: 100%;
+    max-width: 680px;
+    margin: 0 auto;
+    padding-left: 0;
   }
 }
 
@@ -1901,8 +1913,10 @@ body {
   }
 
   .curriculum-module-head {
-    grid-template-columns: 44px 1fr;
-    gap: 13px;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 10px;
+    text-align: center;
   }
 
   .curriculum-number {
