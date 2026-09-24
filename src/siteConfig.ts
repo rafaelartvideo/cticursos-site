@@ -25,7 +25,7 @@ export const courses: Course[] = [
     slug: 'manutencao-de-celulares',
     title: 'Manutenção de Celulares',
     shortTitle: 'Celulares',
-    price: 'R$ 1.200,00',
+    price: 'R$ 1.500,00',
     duration: '2 semanas',
     dailyHours: '3 horas por dia',
     description: 'Formação do básico ao avançado, cobrindo rotina da assistência técnica, segurança, equipamentos de bancada, medições e abertura de smartphones.',
