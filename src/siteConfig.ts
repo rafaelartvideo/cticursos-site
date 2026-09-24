@@ -12,7 +12,7 @@ export type Course = {
   highlights: string[]
   curriculum?: {
     title: string
-    subtitle: string
+    subtitle?: string
     topics: string[]
   }[]
   icon: CourseIcon
@@ -33,32 +33,46 @@ export const courses: Course[] = [
     highlights: ['Gestão e rotina da assistência técnica', 'Equipamentos e medições de bancada', 'Abertura e periféricos de smartphones'],
     curriculum: [
       {
-        title: 'Suporte e gestão',
-        subtitle: 'Organização e rotina da assistência técnica',
+        title: 'Eletrônica Básica',
         topics: [
-          'Suporte técnico e fornecedores',
-          'Gestão da assistência técnica',
-          'Checklist de atendimento e serviço',
-          'Direitos, deveres, IMEI e serviços proibidos',
+          'Noções básicas em eletricidade',
+          'Componentes eletrônicos',
+          'Circuitos integrados',
+          'Instrumentação para eletrônica',
+          'Placas de circuito impresso',
         ],
       },
       {
-        title: 'Equipamentos',
-        subtitle: 'Segurança, bancada e instrumentos de medição',
+        title: 'Montagem e Desmontagem de Aparelhos Celulares',
         topics: [
-          'Eletricidade estática, proteção e EPI',
-          'Estação de retrabalho e ferro de solda',
-          'Fonte assimétrica e multímetro digital',
-          'Microscópio, osciloscópio, separadoras e box',
+          'Ferramentas, estrutura e laboratório',
+          'Dicas de montagem e desmontagem de aparelhos iPhone',
+          'Dicas de montagem e desmontagem de aparelhos Android',
+          'Técnicas de análise e principais defeitos',
+          'Substituição de conectores e troca de LCD Samsung e outros',
+          'Técnica de limpeza e desoxidação (banho químico)',
         ],
       },
       {
-        title: 'Abertura dos dispositivos',
-        subtitle: 'Desmontagem e identificação dos componentes',
+        title: 'Análise e Reparo de Celulares e Tablets',
         topics: [
-          'Desmontagem de diferentes marcas e modelos',
-          'Identificação dos periféricos do smartphone',
-          'Equipamentos e insumos para prestação de serviço',
+          'Análise da placa eletrônica',
+          'Reparo em celulares e microssoldagem',
+          'Técnicas para troca de tela',
+          'Análise de bateria e vida útil Android e iOS',
+          'Instruções para troca de baterias e conectores de carga de iPhone',
+          'Instruções para troca de frontal e botão Home de iPhones',
+        ],
+      },
+      {
+        title: 'Instalação de Softwares e Programas',
+        topics: [
+          'Instalação do software iTunes para iPhone',
+          'Atualizar e restaurar iPhone pelo iTunes',
+          'Instalação do software Odin para Samsung',
+          'Atualizar e restaurar Samsung pelo Odin',
+          'Programas e SW para leitura de esquemas elétricos',
+          'Sistema de gestão financeira da sua loja',
         ],
       },
     ],
