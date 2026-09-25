@@ -331,12 +331,16 @@ function App() {
     const isHome = normalized === '/'
     const isNotFound = !isHome && !course
     const title = course
-      ? `${course.title} | CTI`
+      ? course.slug === 'manutencao-de-celulares'
+        ? 'Curso de Manutenção de Celulares em Aracaju | CTI'
+        : `${course.title} | CTI`
       : isHome
         ? 'CTI | Centro Técnico Integrado'
         : 'Página não encontrada | CTI'
     const description = course
-      ? `${course.shortDescription} Curso presencial no CTI — Centro Técnico Integrado.`
+      ? course.slug === 'manutencao-de-celulares'
+        ? 'Curso presencial de manutenção de celulares em Aracaju, do básico ao avançado, com eletrônica, diagnóstico, prática em bancada e suporte após a formação.'
+        : `${course.shortDescription} Curso presencial no CTI — Centro Técnico Integrado.`
       : 'CTI — Centro Técnico Integrado. Cursos presenciais de eletrônica e manutenção com foco em aprendizado prático.'
     const canonicalUrl = course
       ? `${baseUrl}/cursos/${course.slug}`
